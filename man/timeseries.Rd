@@ -4,24 +4,25 @@
 \name{timeseries}
 \alias{timeseries}
 \title{timeseries}
-\format{A data frame:
+\format{A tibble with 10,804 rows and 9 variables:
 \describe{
-    \item{TimeSeriesID}{The time series ID from the database}
-    \item{Variable}{The time series variable type}
-    \item{TimeStep}{The timestep of time series}
-    \item{Unit}{The units of the time series}
-    \item{Instrument}{The instrument ID}
-    \item{StartDate}{The starting date of time series values}
-    \item{EndDate}{The ending date of time series values}
-    \item{StationID}{The corresponding station's ID}
-    \item{Name}{The time series name}
-    \item{Remarks}{Remarks for time series from Hydroscope}
+    \item{time_id}{The time series ID}
+    \item{station_id}{The corresponding station's ID}
+    \item{variable}{The time series variable type}
+    \item{timestep}{The timestep of time series}
+    \item{units}{The units of the time series}
+    \item{start_date}{The starting date of time series values}
+    \item{end_date}{The ending date of time series values}
+    \item{subdomain}{The corresponding Hydroscope's database}
 }}
 \usage{
 timeseries
 }
 \description{
-Time series' data from the Greek National Data bank for Hydrological and
-Meteorological Information database \url{http://kyy.hydroscope.gr/}
+Time series' data from the Greek National Data Bank for
+Hydrological and Meteorological Information.  This dataset is a comprehensive
+look-up table of all of the available measurements for a given station in a
+given Hydroscope's  database, with units of measurement and times  of
+those measurements.
 }
 \keyword{datasets}

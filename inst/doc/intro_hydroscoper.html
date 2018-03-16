@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Konstantinos Vantas" />
+
+<meta name="date" content="2018-03-16" />
+
+<title>An introduction to hydroscoper</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">An introduction to <code>hydroscoper</code></h1>
+<h4 class="author"><em>Konstantinos Vantas</em></h4>
+<h4 class="date"><em>2018-03-16</em></h4>
+
+
+
+<div id="what-is-hydroscope" class="section level2">
+<h2>What is Hydroscope?</h2>
+<p><a href="http://www.hydroscope.gr/">Hydroscope</a> is the Greek National Data Bank for Hydrological and Meteorological Information, a result of long-standing efforts by numerous Greek scientists in collaboration with various companies and associations. It was implemented in three phases, funded by the Ministry of Development, the Ministry of Environment and Energy and the European Union.</p>
+<p>This National Data Bank provides several data sources from various organisations via a web interface. Each participating organisation keeps its data on its own server using a database system for the storage and management of information. These organisations are:</p>
+<ul>
+<li>Ministry of Environment and Energy.</li>
+<li>Ministry of Rural Development and Food.</li>
+<li>National Meteorological Service.</li>
+<li>National Observatory of Athens.</li>
+<li>Greek Prefectures.</li>
+<li>Public Power Corporation.</li>
+</ul>
+<p>The above data are structured as tables and space separated text files, but are in Greek, thus limiting their usefulness. Another issue with Hydroscope is the lack of comprehensive look-up tables about the available data, which are spread across many different databases.</p>
+</div>
+<div id="what-does-hydroscoper" class="section level2">
+<h2>What does <code>hydroscoper</code>?</h2>
+<p><code>hydroscoper</code> provides functionality for automatic retrieval and translation of Hydroscope’s data to English. The main functions that can be utilized is the family of functions, <code>get_stations</code>, <code>get_timeseries</code>, <code>get_data</code>, etc., to easily download Hydroscope’s data as <a href="http://tibble.tidyverse.org/">tibbles</a>.</p>
+<p>The package covers Hydroscope’s data sources using the Enhydris API. The Enhydris database is implemented in PostgreSQL and details about the database can be found <a href="http://bit.ly/2D0cZgA">here</a>, and about the Web-service API <a href="http://bit.ly/2FlRtBB">here</a>.</p>
+<div id="internal-datasets" class="section level3">
+<h3>Internal datasets</h3>
+<p>The internal datasets of the package can be used to run queries on the available Hydroscope’s stations and time series data, reducing the time needed for downloading and <a href="http://bit.ly/1KslZb7">data wrangling</a>, as these data are rarely modified. These datasets are:</p>
+<div id="stations" class="section level4">
+<h4><code>stations</code></h4>
+<p>It is a comprehensive look-up table with geographical and ownership information of the available stations in all Hydroscope’s databases. The variables are:</p>
+<ol style="list-style-type: decimal">
+<li><code>station_id</code> The station’s ID.</li>
+<li><code>name</code> The station’s name.</li>
+<li><code>water_basin</code> The station’s Water Basin.</li>
+<li><code>water_division</code> The station’s Water Division.</li>
+<li><code>owner</code> The station’s owner.</li>
+<li><code>longitude</code> The station’s longitude in decimal degrees, <a href="http://bit.ly/2kJwFuf">ETRS89</a>.</li>
+<li><code>latitude</code> The station’s latitude in decimal degrees, <a href="http://bit.ly/2kJwFuf">ETRS89</a>.</li>
+<li><code>altitude</code> The station’s altitude, meters above sea level.</li>
+<li><code>subdomain</code> The corresponding Hydroscope’s database.</li>
+</ol>
+</div>
+<div id="timeseries" class="section level4">
+<h4><code>timeseries</code></h4>
+<p>It is also a look-up table with all the available measurements for a given station in a given Hydroscope’s database, with units of measurement and times of those measurements. The variables are:</p>
+<ol style="list-style-type: decimal">
+<li><code>time_id</code> The time series ID.</li>
+<li><code>station_id</code> The corresponding station’s ID.</li>
+<li><code>variable</code> The time series variable type.</li>
+<li><code>timestep</code> The timestep of time series.</li>
+<li><code>units</code> The units of the time series.</li>
+<li><code>start_date</code> The starting date of time series values.</li>
+<li><code>end_date</code> The ending date of time series values.</li>
+<li><code>subdomain</code> The corresponding Hydroscope’s database.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="data-sources" class="section level2">
+<h2>Data sources</h2>
+<ul>
+<li>Ministry of Environment and Energy, National Observatory of Athens and Greek Prefectures, <code>http://kyy.hydroscope.gr/</code>.</li>
+<li>Ministry of Rural Development and Food, <code>http://ypaat.hydroscope.gr</code>.</li>
+<li>National Meteorological Service, <code>http://emy.hydroscope.gr</code>.</li>
+<li>Greek Public Power Corporation, <code>http://deh.hydroscope.gr</code>.</li>
+</ul>
+<p>Note that:</p>
+<ol style="list-style-type: decimal">
+<li>Only the two Ministries allow to download time series values freely.</li>
+<li><code>ypaat</code>, <code>emy</code> and <code>kyy</code> sub-domains are maintained by the National Technical University Of Athens and these servers work seamlessly.</li>
+<li><code>deh</code> sub-domain is maintained by the Greek Public Power Corporation and occasionally the server is down.</li>
+</ol>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<p>This is a basic example which shows how to get the stations’ and time series’ data from the Hydroscope’s Ministry of Environment and Energy database, <a href="http://kyy.hydroscope.gr/" class="uri">http://kyy.hydroscope.gr/</a>.</p>
+<p>Load libraries:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(hydroscoper)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(tibble)</a></code></pre></div>
+<p>We will use the package’s data <code>stations</code> and <code>timeseries</code>, to reduce the time needed with data munging. We can subset the station’s data for the <code>kyy</code> sub-domain with:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># load data</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;stations&quot;</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># subset stations data</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">kyy_stations &lt;-<span class="st"> </span><span class="kw">subset</span>(stations, subdomain <span class="op">==</span><span class="st"> &quot;kyy&quot;</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># view kyy stations</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">kyy_stations</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; # A tibble: 425 x 9</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;    station_id name    water_basin  water_division owner longitude latitude</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;         &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;  1     501032 AG. BA~ &quot;KOURTALIOT~ GR13           min_~      NA       NA  </span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  2     200246 GEPH. ~ &quot;ALPHEIOS P~ GR01           min_~      22.0     37.5</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  3     200237 TROPAIA &quot;ALPHEIOS P~ GR01           min_~      22.0     37.7</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt;  4     200231 BYTINA  &quot;ALPHEIOS P~ GR01           min_~      22.2     37.7</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt;  5     200200 LYKOUR~ &quot;ALPHEIOS P~ GR01           min_~      22.2     37.9</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt;  6     200236 MEGALO~ &quot;ALPHEIOS P~ GR01           min_~      22.1     37.4</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;  7     200244 ODOG. ~ &quot;REMA CHORA~ GR01           min_~      21.8     37.0</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;  8     200204 TRIPOT~ &quot;ALPHEIOS P~ GR01           min_~      21.9     37.9</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  9     200198 KASTEL~ &quot;ALPHEIOS P~ GR01           min_~      22.0     37.9</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; 10     200239 PERDIK~ &quot;ALPHEIOS P~ GR01           min_~      22.0     37.7</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; # ... with 415 more rows, and 2 more variables: altitude &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; #   subdomain &lt;chr&gt;</span></a></code></pre></div>
+<p>Let’s plot these stations using the package’s dataset <code>greece_borders</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> greece_borders,</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">               <span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group),</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">               <span class="dt">fill =</span> <span class="st">&quot;grey&quot;</span>,</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">               <span class="dt">color =</span> <span class="ot">NA</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> kyy_stations,</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">             <span class="kw">aes</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude),</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">             <span class="dt">color =</span> <span class="st">&quot;#E64B35FF&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="st">  </span><span class="kw">theme_bw</span>()</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; Warning: Removed 11 rows containing missing values (geom_point).</span></a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>To get the time series’ data for the station <code>200200</code> (<a href="http://kyy.hydroscope.gr/stations/d/200200/" class="uri">http://kyy.hydroscope.gr/stations/d/200200/</a>) we can use:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">station_ts &lt;-<span class="st"> </span><span class="kw">subset</span>(timeseries, station_id <span class="op">==</span><span class="st"> </span><span class="dv">200200</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">station_ts</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; # A tibble: 4 x 8</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;   time_id station_id variable timestep units start_date end_date subdomain</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;     &lt;int&gt;      &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;    </span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; 1     761     200200 wind_di~ &lt;NA&gt;     °     1948-01-0~ 1997-07~ kyy      </span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; 2      56     200200 precipi~ 30_minu~ mm    1985-05-0~ 1997-01~ kyy      </span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 3     760     200200 snow     daily    mm    1948-01-0~ 1997-07~ kyy      </span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; 4     759     200200 precipi~ daily    mm    1953-03-0~ 2011-06~ kyy</span></a></code></pre></div>
+<p>We can download the station’s precipitation time series <strong>56</strong> (<a href="http://kyy.hydroscope.gr/timeseries/d/56/" class="uri">http://kyy.hydroscope.gr/timeseries/d/56/</a>):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">ts_raw &lt;-<span class="st"> </span><span class="kw">get_data</span>(<span class="dt">subdomain =</span> <span class="st">&quot;kyy&quot;</span>, <span class="dt">time_id =</span> <span class="dv">56</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">ts_raw</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; # A tibble: 147,519 x 3</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;    date                value comment</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt; &lt;chr&gt;  </span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  1 1985-05-06 08:00:00    0. 1      </span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  2 1985-05-06 08:30:00    0. 1      </span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  3 1985-05-06 09:00:00    0. 1      </span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  4 1985-05-06 09:30:00    0. 1      </span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  5 1985-05-06 10:00:00    0. 1      </span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  6 1985-05-06 10:30:00    0. 1      </span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  7 1985-05-06 11:00:00    0. 1      </span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  8 1985-05-06 11:30:00    0. 1      </span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;  9 1985-05-06 12:00:00    0. 1      </span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 10 1985-05-06 12:30:00    0. 1      </span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; # ... with 147,509 more rows</span></a></code></pre></div>
+<p>Let’s create a plot:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> ts_raw, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> value))<span class="op">+</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span> <span class="st">&quot;30 min precipitation&quot;</span>, </a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">       <span class="dt">subtitle =</span> <span class="st">&quot;station 200200&quot;</span>,</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">       <span class="dt">x=</span><span class="st">&quot;Date&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Rain height (mm)&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="st">  </span><span class="kw">theme_classic</span>()</a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

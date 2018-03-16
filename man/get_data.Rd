@@ -2,60 +2,57 @@
 % Please edit documentation in R/get_data.R
 \name{get_data}
 \alias{get_data}
-\title{Get time series values in a tidy dataframe}
+\title{Get time series values in a tibble}
 \usage{
-get_data(subdomain = c("kyy", "ypaat", "emy"), timeID)
+get_data(subdomain = c("kyy", "ypaat", "emy", "deh"), time_id)
 }
 \arguments{
 \item{subdomain}{One of the subdomains of hydroscope.gr}
 
-\item{timeID}{A time series ID}
+\item{time_id}{A time series ID}
 }
 \value{
-If \code{subdomain} is one of \code{"kyy"} (Ministry of Environment
-and Energy), \code{"ypaat"} (Ministry of Rural Development and Food) or
-\code{"emy"} (National Meteorological Service), and timeID is not NULL,
-returns a tidy dataframe with the time series values from the corresponding
-time series and database of hydroscope.gr. Otherwise gives an error message.
-
-If the time series ID does not exist in the database, or the url from
-Hydroscope could not parsed, returns a dataframe with NA values.
+If \code{subdomain} is one of:
+\itemize{
+\item{\code{kyy}, Ministry of Environment and Energy}
+\item{\code{ypaat}, Ministry of Rural Development and Food}
+\item{\code{deh}, Greek Public Power Corporation}
+\item{\code{emy}, National Meteorological Service}
+}
+and \code{time_id} exists in that \code{subdomain}, returns a tibble with the time series values. Otherwise returns an error message.
 
 The dataframe columns are:
 \describe{
-    \item{Date}{The time series Dates (POSIXct)}
-    \item{Value}{The time series values (numeric)}
-    \item{Comment}{Comments from Hydroscope (character)}
+    \item{date}{The time series Dates (POSIXct)}
+    \item{value}{The time series values (numeric)}
+    \item{comment}{Comments about the values (character)}
 }
 }
 \description{
-\code{get_data} returns a tidy dataframe with the available data from
-a time series in a database of Hydroscope.
+\code{get_data} returns a tibble from  a Hydroscope's
+time-series text file.
 }
 \note{
-The subdomain "main" from Hydroscope is not used, because it uses different
-ID values for time series from the other subdomains and also because it does
-not contain the raw data of the time series.
+Data are not available freely in the sub-domains:  \code{"deh"}
+(Greek Public Power Corporation) and
+\code{"emy"} (National Meteorological Service).
 }
 \examples{
-# get time series 912 from the Greek Ministry of Environment and Energy
-df <-get_data("kyy", 912)
-
 \dontrun{
-get_data("ypaat")
+# get time series 912 from the Greek Ministry of Environment and Energy
+time_series <- get_data("kyy", 912)
 }
 
 }
 \references{
-Stations' data are retrieved from the Hydroscope's databases:
+Stations' data are retrieved from the Hydroscope's
+\url{http://www.hydroscope.gr/} databases:
 \itemize{
-\item Ministry of Environment, Energy and Climate Change,
-\url{http://kyy.hydroscope.gr}
-\item Ministry of Rural Development and Food,
-\url{http://ypaat.hydroscope.gr}
-\item National Meteorological Service,
-\url{http://emy.hydroscope.gr}
+\item Ministry of Environment, Energy and Climate Change.
+\item Ministry of Rural Development and Food.
 }
+
+Tibble, \url{http://tibble.tidyverse.org/}
 }
 \author{
 Konstantinos Vantas, \email{kon.vantas@gmail.com}

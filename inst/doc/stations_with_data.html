@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Konstantinos Vantas" />
+
+<meta name="date" content="2018-03-16" />
+
+<title>Using hydroscoper’s data</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Using <code>hydroscoper</code>’s data</h1>
+<h4 class="author"><em>Konstantinos Vantas</em></h4>
+<h4 class="date"><em>2018-03-16</em></h4>
+
+
+
+<p>This vignette shows how to use the package’s internal data sets.</p>
+<div id="load-libraries" class="section level2">
+<h2>Load libraries</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(hydroscoper)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(ggplot2)</a></code></pre></div>
+</div>
+<div id="data-sets" class="section level2">
+<h2>Data sets</h2>
+<p>There are three data sets stored in the package. <code>stations</code> is comprised of the stations’ id, name, longitude, latitude, etc.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">stations</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; # A tibble: 2,322 x 9</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;    station_id name    water_basin  water_division owner longitude latitude</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;         &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;  1     501032 AG. BA~ &quot;KOURTALIOT~ GR13           min_~      NA       NA  </span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;  2     200246 GEPH. ~ &quot;ALPHEIOS P~ GR01           min_~      22.0     37.5</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt;  3     200237 TROPAIA &quot;ALPHEIOS P~ GR01           min_~      22.0     37.7</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt;  4     200231 BYTINA  &quot;ALPHEIOS P~ GR01           min_~      22.2     37.7</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;  5     200200 LYKOUR~ &quot;ALPHEIOS P~ GR01           min_~      22.2     37.9</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;  6     200236 MEGALO~ &quot;ALPHEIOS P~ GR01           min_~      22.1     37.4</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;  7     200244 ODOG. ~ &quot;REMA CHORA~ GR01           min_~      21.8     37.0</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;  8     200204 TRIPOT~ &quot;ALPHEIOS P~ GR01           min_~      21.9     37.9</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  9     200198 KASTEL~ &quot;ALPHEIOS P~ GR01           min_~      22.0     37.9</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; 10     200239 PERDIK~ &quot;ALPHEIOS P~ GR01           min_~      22.0     37.7</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; # ... with 2,312 more rows, and 2 more variables: altitude &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt; #   subdomain &lt;chr&gt;</span></a></code></pre></div>
+<p><code>timeseries</code> of the time series’ id, the corresponding station, variable type, time step etc.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">timeseries</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; # A tibble: 10,804 x 8</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;    time_id station_id variable   timestep units start_date     end_date   </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;      </span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;  1    2248     501049 temperatu~ &lt;NA&gt;     °     2009-02-01T00~ 2010-08-31~</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  2     430     200103 wind_dire~ &lt;NA&gt;     °     1950-10-26T08~ 1997-07-19~</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;  3     905     200247 wind_dire~ &lt;NA&gt;     °     1967-01-01T08~ 1997-12-31~</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;  4    2243     501058 temperatu~ &lt;NA&gt;     °     1999-01-01T00~ 2010-08-31~</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  5     438     200105 wind_dire~ &lt;NA&gt;     °     1950-06-05T08~ 1997-07-31~</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  6     553     200135 wind_dire~ &lt;NA&gt;     °     1964-11-21T08~ 1997-08-31~</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  7     966     200265 wind_dire~ &lt;NA&gt;     °     1967-01-01T08~ 1997-03-31~</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;  8     775     200203 wind_dire~ &lt;NA&gt;     °     1964-05-20T08~ 1997-06-30~</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  9    2245     501046 temperatu~ &lt;NA&gt;     °     2007-07-01T01~ 2010-07-07~</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 10     247     200034 wind_dire~ &lt;NA&gt;     °     1969-11-25T08~ 1997-09-18~</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; # ... with 10,794 more rows, and 1 more variable: subdomain &lt;chr&gt;</span></a></code></pre></div>
+<p><code>greece_borders</code> is a data-frame for use with the function <code>geom_polygon</code> from the <code>ggplot2</code> package.</p>
+</div>
+<div id="stations-location" class="section level2">
+<h2>Stations location</h2>
+<p><code>stations</code> and <code>greece_borders</code> can be used to create a map with all Hydroscope’s stations. Unfortunately, there is a number of them that have erroneous coordinates (over the sea and far from Greece). Also, there are 120 stations with missing coordinates.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> greece_borders,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">               <span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group),</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">               <span class="dt">fill =</span> <span class="st">&quot;grey&quot;</span>,</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">               <span class="dt">color =</span> <span class="ot">NA</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> stations,</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">             <span class="kw">aes</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude, <span class="dt">color =</span> subdomain)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#E64B35FF&quot;</span>, <span class="st">&quot;#4DBBD5FF&quot;</span>, <span class="st">&quot;#00A087FF&quot;</span>, </a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">                              <span class="st">&quot;#3C5488FF&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="st">  </span><span class="kw">theme_bw</span>()</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; Warning: Removed 120 rows containing missing values (geom_point).</span></a></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAA+VBMVEUAAAAAAEgAAHQASHQASJwAdL8AoIczMzM8VIhIAABIAEhIAHRISABISJxIdL9InJxInN9NTU1NTXJNTZJNcrBNksxNu9VyTU1yTXJyTZJycpJycrBysOV0AAB0AEh0AHR0SAB0SJx0dAB0dEh0dHR0v790v/+STU2STXKSTZKSck2ScrCSzP+cSACcSEicSHScdACcnEicnHScv5yc37+c3/+wck2wcnKwkk2wzLCw5eWw5f++vr6/dAC/dEi////Mkk3M///fnEjf/7/f///lsHLl///mSzXr6+v/v3T/zJL/35z/39//5bD//7///8z//9///+X///9NMDNQAAAACXBIWXMAAA7DAAAOwwHHb6hkAAANmElEQVR4nO2dC1vbyBWGTUq0SrYX2Gy0bROSpts63RbSbbJk28YU4pIQoIDR//8xnftFM6NPkiUjm/M+AcMwFujN3M9ImpRELZO7/gPGDgkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQKQIAAJApAgAAkCkCAACQJsrqDLx4f2m/MHx80ze5AgAAkCbJCgy0eTyWQqxbBPl4/fTibbp2V5vTfZessELQ4mk4f8R+9Yxh2ee6retCPzv5NJPpsjSIp5NDWCHm2fLg4eMj877OPBMf+af/D0cs7VzR8cX+8xI+xV5edfVg67QYK+ludmBU3Fq6hd7MTFK/sk09UP/3daquJm8lcOuzmCyiNRg6wgLoyVkDmvZuybc/EqXNhMTBmrYluHXrpHvaDb9/tlefXd7u7+YKfVJ6y1EbWluaDrva1DXYK6CPrEzNz85UN59dsPw51WnzAhtpE+tFWMfTrfOpRVzBUkrJ13LkFXv//rfnnxlH11oovQVyMg/scKEaJQ7LDGeMtppB/6jbQniBegR10F3f787/dSDC9FSs6XOychSLUmsuf+8wvZzfNGKejm3TaINVxbP4li10HQp+e3UtDt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To+CkgkDCOIBeRHqaR7vUQBBrARdPfunqmJtbvJ2xq/rESfV8A0O0R1nNqXrSFqEeprHexQ47MPvQMWDh5KGJUgt0fP/9FkiS20Jyk2LY+jeBklEqKdFvEfRIOwTu9qnoaC6LNEE1cn3O9VYCtTNn+zf/G3VgmpuizcqQTogdtKhivmXp8pNZnbck3hP+WVW+KuK4xakwz43r2u2v2ji4yBJZtfpM7VuH3uPzoOOOh5BMboIqmyEUbvRcjs5FRT3WZCj58zZqSd06AWA+yzI91MJe8jSFK1h90WQXhwKBenS5BQhfNRNFZSJe5I6VhxSw577IkiOgmX/ZeIdnqA2Rx25oPZTKzvD8iPzhSlNeasDjVyQfGlZgjh6/OOs58v9DXnyLWtZguTLEoLMDaSrA6E7ENTgJierExRsmm8+vfdToKDgFyUZl6A+EpoICq7vENf2/PflP8wjAdQzfabyKqB67oMgEeu53ts+PX9wLLbZf61fhihBI6CtIBnw2ZvqEKu6dkPd8K1nQSkatJw4Sy8HCdsgEevhZYZXNv4kDV6vxMs9FRTAYz3iCo03oiDxKiZfSJCEx3r4E2z0Ld7kk5H0A5Lq2aDHZ6XhsZ7rF9+LXmw+ETd8ky+Lg957sbWEx3pEG9SB+yBIxHpI0ECQIMDygswT/uyt8pJZ1OO4Ujn8p+RUUHtNvMv7VsDSgswT/i6c4FAii7g3bH0OZyOJj9pr4t9ZdgUsLUg/4e/km3+lSpB5CKC4N2xtDieGG0HtNUkX1QHopQ2SZ1X7d/Ms9pGA6YPUlg6x1+RzvcS+6UOQesJfnSCRxTwSMH2QunMXe038C0RXQA+C9BP+agSJLOaRgDUHSbVAKlN1r8kK6KMXUydd14vxLPqRgHUHOYn/WHOyv35tkH3CX/LvtllSJUjnuP05WTZU3fLvLLsClhZkxy5JQTZLSpDOUVd57F6T9RoHbTokCECCACQIQIIAJAhAggAkCLACQa0vsBkVJAhAggArErQ4EDcZvnz8Tu4+4Tfue9fuaYx3xGoE8fvMynvNbp+W8wfH13s7zBGMao6B1QgSN/dkny4fTe33cxIk4UL4zT35ZgF12ai42WfLB57eESQIsCJBPDrOq5gSpKvc8L98aVbcSCtB1Ei7eN38od7ONNl6S4LqafE84TvkbgTxNolXuTXgjkrQHDy+YzzQcgeABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAFIEIAEAUgQgAQBSBCABAH+D36XmMpDqFC2AAAAAElFTkSuQmCC" /><!-- --></p>
+</div>
+<div id="stations-with-available-time-series" class="section level2">
+<h2>Stations with available time series</h2>
+<p>The location of the stations with time series available to download are presented at the following map.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">stations_ts &lt;-<span class="st"> </span><span class="kw">subset</span>(stations, station_id <span class="op">%in%</span><span class="st"> </span>timeseries<span class="op">$</span>station_id <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">                        </span>subdomain <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;kyy&quot;</span>, <span class="st">&quot;ypaat&quot;</span>))</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> greece_borders,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">               <span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group),</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">               <span class="dt">fill =</span> <span class="st">&quot;grey&quot;</span>,</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">               <span class="dt">color =</span> <span class="ot">NA</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> stations_ts,</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">             <span class="kw">aes</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude, <span class="dt">color =</span> subdomain)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#00A087FF&quot;</span>, <span class="st">&quot;#3C5488FF&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="st">  </span><span class="kw">coord_fixed</span>(<span class="dt">ratio=</span><span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="st">  </span><span class="kw">theme_bw</span>()</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; Warning: Removed 10 rows containing missing values (geom_point).</span></a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Although there is a large number of stations with available data, there is heterogeneity in the coverage of the country.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
