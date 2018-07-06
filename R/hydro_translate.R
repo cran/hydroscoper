@@ -133,11 +133,6 @@
 #' }
 #'
 #'
-#' @references
-#'
-#' Greek Water Divisions,
-#' \url{http://bit.ly/2kk0tOm}, \url{http://bit.ly/2ltQC8O}
-#'
 #' @export hydro_translate
 #'
 #' @examples
@@ -156,7 +151,7 @@ hydro_translate <- function(x,
   # match translate values
   value <- match.arg(value)
 
-  # transalte x
+  # translate x
   switch (value,
           owner = map_owners(x),
           variable = map_variables(x),

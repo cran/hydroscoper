@@ -9,16 +9,15 @@ Status](https://travis-ci.org/ropensci/hydroscoper.svg?branch=master)](https://t
 Status](https://ci.appveyor.com/api/projects/status/github/ropensci/hydroscoper?branch=master&svg=true)](https://ci.appveyor.com/project/ropensci/hydroscoper)
 [![codecov](https://codecov.io/github/ropensci/hydroscoper/branch/master/graphs/badge.svg)](https://codecov.io/gh/ropensci/hydroscoper)
 [![minimal R
-version](https://img.shields.io/badge/R%3E%3D-3.4.0-6666ff.svg)](https://cran.r-project.org/)
+version](https://img.shields.io/badge/R%3E%3D-3.5.0-6666ff.svg)](https://cran.r-project.org/)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/hydroscoper)](https://cran.r-project.org/package=hydroscoper)
-[![packageversion](https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=flat-square)](https://github.com/ropensci/hydroscoper)
+[![packageversion](https://img.shields.io/badge/Package%20version-1.1.0-orange.svg?style=flat-square)](https://github.com/ropensci/hydroscoper)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/hydroscoper)](http://cran.rstudio.com/web/packages/hydroscoper/index.html)
 [![ropensci](https://badges.ropensci.org/185_status.svg)](https://github.com/ropensci/onboarding/issues/185)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1196540.svg)](https://doi.org/10.5281/zenodo.1196540)
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.00625/status.svg)](https://doi.org/10.21105/joss.00625)
 
-<img src="man/figures/hydroscoper_hex.png" align="right" height="220"/>
-
+<img src="https://github.com/ropensci/hydroscoper/raw/master/man/figures/hydroscoper_hex.png" align = "right" width = 120/>
 `hydroscoper` is an R interface to the Greek National Data Bank for
 Hydrological and Meteorological Information,
 [Hydroscope](http://www.hydroscope.gr/). For more details checkout the
@@ -85,16 +84,16 @@ ts_raw
 #> # A tibble: 147,519 x 3
 #>    date                value comment
 #>    <dttm>              <dbl> <chr>  
-#>  1 1985-05-06 08:00:00    0. 1      
-#>  2 1985-05-06 08:30:00    0. 1      
-#>  3 1985-05-06 09:00:00    0. 1      
-#>  4 1985-05-06 09:30:00    0. 1      
-#>  5 1985-05-06 10:00:00    0. 1      
-#>  6 1985-05-06 10:30:00    0. 1      
-#>  7 1985-05-06 11:00:00    0. 1      
-#>  8 1985-05-06 11:30:00    0. 1      
-#>  9 1985-05-06 12:00:00    0. 1      
-#> 10 1985-05-06 12:30:00    0. 1      
+#>  1 1985-05-06 08:00:00     0 1      
+#>  2 1985-05-06 08:30:00     0 1      
+#>  3 1985-05-06 09:00:00     0 1      
+#>  4 1985-05-06 09:30:00     0 1      
+#>  5 1985-05-06 10:00:00     0 1      
+#>  6 1985-05-06 10:30:00     0 1      
+#>  7 1985-05-06 11:00:00     0 1      
+#>  8 1985-05-06 11:30:00     0 1      
+#>  9 1985-05-06 12:00:00     0 1      
+#> 10 1985-05-06 12:30:00     0 1      
 #> # ... with 147,509 more rows
 ```
 
@@ -118,12 +117,28 @@ ggplot(data = ts_raw, aes(x = date, y = value))+
       - All code is licensed MIT.
       - All data are from the public data sources in
         <http://www.hydroscope.gr/>.
-  - Get citation information for `hydroscoper` in R by
-running:
+  - To cite `hydroscoper` please
+    use:
 
 <!-- end list -->
 
-    citation("hydroscoper")
+    Vantas K., (2018). hydroscoper: R interface to the Greek National Data Bank for
+    Hydrological and Meteorological Information. Journal of Open Source Software,
+    3(23), 625 DOI:10.21105/joss.00625
+
+or the BibTeX entry:
+
+    @Article{kvantas2018,
+    author = {Konstantinos Vantas},
+    title = {{hydroscoper}: R interface to the Greek National Data Bank for Hydrological and Meteorological Information},
+    doi = {10.21105/joss.00625},
+    year = {2018},
+    month = {mar},
+    publisher = {The Open Journal},
+    volume = {2},
+    number = {23},
+    journal = {The Journal of Open Source Software}
+    }
 
 ## References
 

@@ -2,7 +2,7 @@ Package: hydroscoper
 Type: Package
 Title: Interface to the Greek National Data Bank for
         Hydrometeorological Information
-Version: 1.0.0
+Version: 1.1.0
 Authors@R: c(person("Konstantinos", "Vantas",
                     role = c("aut", "cre"),
                     email = "kon.vantas@gmail.com",
@@ -21,19 +21,19 @@ Description: R interface to the Greek National Data Bank for Hydrological and
 URL: https://github.com/ropensci/hydroscoper,
         https://ropensci.github.io/hydroscoper/
 BugReports: https://github.com/ropensci/hydroscoper/issues
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.5.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Imports: stringi (>= 1.1.7), stringr (>= 1.3), tibble(>= 1.4.2), pingr
+Imports: stringi (>= 1.2), stringr (>= 1.3.1), tibble(>= 1.4.2), pingr
         (>= 1.1.2), readr (>= 1.1.1), jsonlite (>= 1.5), plyr (>=
         1.8.4)
-Suggests: ggplot2 (>= 2.2.1), knitr (>= 1.20), rmarkdown (>= 1.9),
+Suggests: ggplot2 (>= 3.0.0), knitr (>= 1.20), rmarkdown (>= 1.10),
         testthat (>= 2.0.0)
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2018-03-16 10:15:42 UTC; Konstantinos
+Packaged: 2018-07-06 14:02:35 UTC; kostis
 Author: Konstantinos Vantas [aut, cre]
     (<https://orcid.org/0000-0001-6387-8791>),
   Sharla Gelfand [ctb, rev] (Sharla Gelfand reviewed the package for
@@ -41,4 +41,4 @@ Author: Konstantinos Vantas [aut, cre]
   Tim Trice [rev] (Tim Trice reviewed the package for rOpenSci, see
     https://github.com/ropensci/onboarding/issues/185)
 Repository: CRAN
-Date/Publication: 2018-03-16 11:50:46 UTC
+Date/Publication: 2018-07-06 14:10:03 UTC
