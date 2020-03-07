@@ -44,13 +44,13 @@ The data are retrieved from the Hydroscope's databases:
 Useful links:
 \itemize{
   \item \url{https://github.com/ropensci/hydroscoper}
-  \item \url{https://ropensci.github.io/hydroscoper/}
+  \item \url{https://docs.ropensci.org/hydroscoper/}
   \item Report bugs at \url{https://github.com/ropensci/hydroscoper/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Konstantinos Vantas \email{kon.vantas@gmail.com} (0000-0001-6387-8791)
+\strong{Maintainer}: Konstantinos Vantas \email{kon.vantas@gmail.com} (\href{https://orcid.org/0000-0001-6387-8791}{ORCID})
 
 Other contributors:
 \itemize{

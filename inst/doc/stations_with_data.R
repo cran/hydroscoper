@@ -1,21 +1,21 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ----load_library--------------------------------------------------------
+## ----load_library-------------------------------------------------------------
 library(hydroscoper)
 library(tibble)
 library(ggplot2)
 
-## ----stations_data-------------------------------------------------------
+## ----stations_data------------------------------------------------------------
 stations
 
-## ----timeseries_data-----------------------------------------------------
+## ----timeseries_data----------------------------------------------------------
 timeseries
 
-## ----all_stations--------------------------------------------------------
+## ----all_stations-------------------------------------------------------------
 ggplot() + 
   geom_polygon(data = greece_borders,
                aes(long, lat, group = group),
@@ -28,7 +28,7 @@ ggplot() +
   coord_fixed(ratio=1) +
   theme_bw()
 
-## ----stations_with_timeseries--------------------------------------------
+## ----stations_with_timeseries-------------------------------------------------
 stations_ts <- subset(stations, station_id %in% timeseries$station_id &
                         subdomain %in% c("kyy", "ypaat"))
 

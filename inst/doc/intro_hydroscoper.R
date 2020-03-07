@@ -1,16 +1,16 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ----load_libraries------------------------------------------------------
+## ----load_libraries-----------------------------------------------------------
 library(hydroscoper)
 library(ggplot2)
 library(tibble)
 
 
-## ----subset_data---------------------------------------------------------
+## ----subset_data--------------------------------------------------------------
 # load data
 data("stations")
 
@@ -20,7 +20,7 @@ kyy_stations <- subset(stations, subdomain == "kyy")
 # view kyy stations
 kyy_stations
 
-## ----kyy_stations_map----------------------------------------------------
+## ----kyy_stations_map---------------------------------------------------------
 ggplot() + 
   geom_polygon(data = greece_borders,
                aes(long, lat, group = group),
@@ -32,15 +32,15 @@ ggplot() +
   coord_fixed(ratio=1) +
   theme_bw()
 
-## ----subset_timeseries---------------------------------------------------
+## ----subset_timeseries--------------------------------------------------------
 station_ts <- subset(timeseries, station_id == 200200)
 station_ts
 
-## ----get_timeseries------------------------------------------------------
+## ----get_timeseries-----------------------------------------------------------
 ts_raw <- get_data(subdomain = "kyy", time_id = 56)
 ts_raw
 
-## ----plot_time_series----------------------------------------------------
+## ----plot_time_series---------------------------------------------------------
 ggplot(data = ts_raw, aes(x = date, y = value))+
   geom_line()+
   labs(title= "30 min precipitation", 
