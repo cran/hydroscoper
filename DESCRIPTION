@@ -2,7 +2,7 @@ Package: hydroscoper
 Type: Package
 Title: Interface to the Greek National Data Bank for
         Hydrometeorological Information
-Version: 1.4
+Version: 1.4.1
 Authors@R: c(person("Konstantinos", "Vantas",
                     role = c("aut", "cre"),
                     email = "kon.vantas@gmail.com",
@@ -32,7 +32,7 @@ Suggests: ggplot2 (>= 3.3), knitr (>= 1.31), rmarkdown (>= 2.7),
         testthat (>= 3.0)
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-03-21 14:44:11 UTC; kostis
+Packaged: 2021-05-14 16:19:01 UTC; kostis
 Author: Konstantinos Vantas [aut, cre]
     (<https://orcid.org/0000-0001-6387-8791>),
   Sharla Gelfand [ctb, rev] (Sharla Gelfand reviewed the package for
@@ -40,4 +40,4 @@ Author: Konstantinos Vantas [aut, cre]
   Tim Trice [rev] (Tim Trice reviewed the package for rOpenSci, see
     https://github.com/ropensci/onboarding/issues/185)
 Repository: CRAN
-Date/Publication: 2021-03-21 15:00:02 UTC
+Date/Publication: 2021-05-14 16:30:03 UTC

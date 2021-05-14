@@ -46,18 +46,18 @@ ggplot() +
   theme_bw()
 
 ## ----subset_timeseries, eval = chk_online-------------------------------------
-#  station_ts <- subset(timeseries, station_id == 200200)
-#  station_ts
+station_ts <- subset(timeseries, station_id == 200200)
+station_ts
 
 ## ----get_timeseries, eval = chk_online----------------------------------------
-#  ts_raw <- get_data(subdomain = "kyy", time_id = 56)
-#  ts_raw
+ts_raw <- get_data(subdomain = "kyy", time_id = 56)
+ts_raw
 
 ## ----plot_time_series, eval = chk_online--------------------------------------
-#  ggplot(data = ts_raw, aes(x = date, y = value))+
-#    geom_line()+
-#    labs(title= "30 min precipitation",
-#         subtitle = "station 200200",
-#         x="Date", y = "Rain height (mm)")+
-#    theme_classic()
+ggplot(data = ts_raw, aes(x = date, y = value))+
+  geom_line()+
+  labs(title= "30 min precipitation", 
+       subtitle = "station 200200",
+       x="Date", y = "Rain height (mm)")+
+  theme_classic()
 
